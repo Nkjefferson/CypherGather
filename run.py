@@ -6,6 +6,7 @@ wd = "Empty"
 
 @app.route("/words", methods=['GET', 'POST'])
 def hello_monkey():
+    global wd
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
     wd = body
@@ -16,7 +17,7 @@ def hello_monkey():
 
 @app.route("/", methods=['GET', 'POST'])
 def ind():
-    
+    global wd
     return render_template('index.html',word=wd);
 if __name__ == "__main__":
     app.run(debug=True)
