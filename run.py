@@ -1,4 +1,4 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 import twilio.twiml
 
 app = Flask(__name__)
@@ -10,7 +10,7 @@ def hello_monkey():
 
     resp = twilio.twiml.Response()
     resp.message(body)
-    return str(resp)
+    return render_template('index.html', word = body)
 
 if __name__ == "__main__":
     app.run(debug=True)
