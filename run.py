@@ -32,7 +32,7 @@ def ind():
     if len(wd) == 0:
         curr = dic[random.randint(0,len(dic))]
     else:
-        curr = wd[i]
+        curr = wd.pop()
     return render_template('index.html',word=curr);
 if __name__ == "__main__":
     app.run(debug=True)
