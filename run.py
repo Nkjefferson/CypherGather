@@ -1,9 +1,12 @@
 from flask import Flask, request, redirect, render_template
 import twilio.twiml
+import random
 
 app = Flask(__name__)
 wd = []
+
 i = 0
+random.seed()
 
 @app.route("/words", methods=['GET', 'POST'])
 def hello_monkey():
@@ -20,11 +23,14 @@ def hello_monkey():
 def ind():
     global wd
     global i
+    dic = []
+    with open('static/list.txt', 'r') as f:
+        dic = [line.strip() for line in f]
     i = i+1
     if i >= len(wd):
         i = 0
     if len(wd) == 0:
-        curr = "empty"
+        curr = dic[random.randint(0,len(dic))]
     else:
         curr = wd[i]
     return render_template('index.html',word=curr);
