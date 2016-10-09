@@ -4,7 +4,9 @@ import random
 
 app = Flask(__name__)
 wd = []
-
+dic = []
+with open('static/list.txt', 'r') as f:
+    dic = [line.strip() for line in f]
 i = 0
 random.seed()
 
@@ -23,9 +25,7 @@ def hello_monkey():
 def ind():
     global wd
     global i
-    dic = []
-    with open('static/list.txt', 'r') as f:
-        dic = [line.strip() for line in f]
+    global dic
     i = i+1
     if i >= len(wd):
         i = 0
