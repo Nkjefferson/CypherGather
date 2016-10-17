@@ -30,7 +30,7 @@ def ind():
     if i >= len(wd):
         i = 0
     if len(wd) == 0:
-        curr = dic[random.randint(0,len(dic))]
+        curr = dic[random.randint(0,len(dic))].title()
     else:
         curr = wd.pop()
     return render_template('index.html',word=curr);
