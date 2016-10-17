@@ -5,6 +5,7 @@ import random
 app = Flask(__name__)
 wd = []
 dic = []
+used = []
 with open('static/list.txt', 'r') as f:
     dic = [line.strip() for line in f]
 i = 0
@@ -29,10 +30,13 @@ def ind():
     i = i+1
     if i >= len(wd):
         i = 0
-    if len(wd) == 0:
+    if len(wd) == 0 or wd[0] in used:
         curr = dic[random.randint(0,len(dic))].title()
+        if len(wd) > 0:
+            wd.pop()
     else:
         curr = wd.pop()
+	used.append(curr)
     return render_template('index.html',word=curr);
 if __name__ == "__main__":
     app.run(debug=True)
