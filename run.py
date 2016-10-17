@@ -20,6 +20,8 @@ def hello_monkey():
 
     resp = twilio.twiml.Response()
     resp.message(body)
+    if wd[len(wd)-1] in used:
+        resp.message("word has already been used")
     return str(resp)
 
 @app.route("/", methods=['GET', 'POST'])
@@ -30,7 +32,7 @@ def ind():
     i = i+1
     if i >= len(wd):
         i = 0
-    if len(wd) == 0 or wd[0] in used:
+    if len(wd) == 0 or wd[len(wd)-1] in used:
         curr = dic[random.randint(0,len(dic))].title()
         if len(wd) > 0:
             wd.pop()
