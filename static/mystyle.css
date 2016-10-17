@@ -1,11 +1,11 @@
 h1 {
     font-size: 3rem;
     text-align: center;
+    font-family: 'Oswald', sans-serif;
 }
 
 p {
     font-size: 15rem;
     text-align: center;
-    font-family: "Arial Black", Gadget, sans-serif;
-
+    font-family: 'Oswald', sans-serif;
 }
