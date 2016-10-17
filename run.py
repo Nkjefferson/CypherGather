@@ -19,9 +19,10 @@ def hello_monkey():
     wd.append(body)
 
     resp = twilio.twiml.Response()
-    resp.message(body)
     if wd[len(wd)-1] in used:
         resp.message("word has already been used")
+    else:
+        resp.message(body)
     return str(resp)
 
 @app.route("/", methods=['GET', 'POST'])
