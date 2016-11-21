@@ -17,15 +17,14 @@ def hello_monkey():
     global wd
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
-    resp = twilio.twiml.Response()
-    if not(" " in body) and body not in blacklist and body not in used:
+    if " " not in body and wd not in blacklist and wd not in used:
         wd.append(body.title())
-        resp.message(body)
 
+    resp = twilio.twiml.Response()
     if body in used:
         resp.message(body,"has already been submitted")
-    elif body in blacklist:
-        resp.message(body,"is a word the preformers would rather not use")
+    else:
+        resp.message(body)
     return str(resp)
 
 @app.route("/", methods=['GET', 'POST'])
