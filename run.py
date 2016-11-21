@@ -1,9 +1,10 @@
 from flask import Flask, request, redirect, render_template
+from collections import deque
 import twilio.twiml
 import random
 
 app = Flask(__name__)
-wd = []
+wd = deque()
 dic = []
 used = []
 with open('static/list.txt', 'r') as f:
@@ -16,11 +17,12 @@ def hello_monkey():
     global wd
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
-    wd.append(body)
+    if " " not in wd and wd not in blacklist and wd not in used:
+        wd.append(body.title())
 
     resp = twilio.twiml.Response()
-    if wd[len(wd)-1] in used:
-        resp.message("word has already been used")
+    if body in used:
+        resp.message("word has already been submitted")
     else:
         resp.message(body)
     return str(resp)
@@ -33,13 +35,11 @@ def ind():
     i = i+1
     if i >= len(wd):
         i = 0
-    if len(wd) == 0 or wd[len(wd)-1] in used:
+    if len(wd) == 0:
         curr = dic[random.randint(0,len(dic))].title()
-        if len(wd) > 0:
-            wd.pop()
     else:
-        curr = wd.pop()
-	used.append(curr)
+        curr = wd.popleft()
+    used.append(curr)
     return render_template('index.html',word=curr);
 if __name__ == "__main__":
     app.run(debug=True)
