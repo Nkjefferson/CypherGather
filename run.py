@@ -17,15 +17,17 @@ def hello_monkey():
     global used
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
+    resp = twilio.twiml.Response()
     if body not in used:
         wd.append(body)
         used.append(body)
-
-    resp = twilio.twiml.Response()
-    if body in used:
+        resp.message(body)
+    elif body in used:
         resp.message(body + ", has already been used")
     else:
-        resp.message(body)
+        resp.message("invalid")
+
+
     return str(resp)
 
 @app.route("/", methods=['GET', 'POST'])
