@@ -18,12 +18,14 @@ def hello_monkey():
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
     resp = twilio.twiml.Response()
-    if body not in used:
+    if body not in used and ' ' not in body:
         wd.append(body)
         used.append(body)
         resp.message(body)
     elif body in used:
         resp.message(body + ", has already been used")
+    elif ' ' in body:
+        resp.message("Must be a single word")
     else:
         resp.message("invalid")
 
