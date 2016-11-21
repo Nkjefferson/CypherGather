@@ -19,8 +19,8 @@ def hello_monkey():
     wd.append(body)
 
     resp = twilio.twiml.Response()
-    if wd[len(wd)-1] in used:
-        resp.message("word has already been used")
+    if body in used:
+        resp.message(body,", has already been used")
     else:
         resp.message(body)
     return str(resp)
@@ -37,7 +37,7 @@ def ind():
     if len(wd) == 0:
         curr = dic[random.randint(0,len(dic))].title()
     else:
-        curr = wd.popleft()
+        curr = wd.pop()
     used.append(curr)
     return render_template('index.html',word=curr);
 if __name__ == "__main__":
