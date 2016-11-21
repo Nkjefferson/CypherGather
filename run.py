@@ -17,7 +17,7 @@ def hello_monkey():
     global wd
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
-    if " " not in wd and wd not in blacklist and wd not in used:
+    if " " not in body and wd not in blacklist and wd not in used:
         wd.append(body.title())
 
     resp = twilio.twiml.Response()
@@ -32,6 +32,7 @@ def ind():
     global wd
     global i
     global dic
+    global used
     i = i+1
     if i >= len(wd):
         i = 0
