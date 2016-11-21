@@ -1,10 +1,9 @@
 from flask import Flask, request, redirect, render_template
-from collections import deque
 import twilio.twiml
 import random
 
 app = Flask(__name__)
-wd = deque()
+wd = []
 dic = []
 used = []
 with open('static/list.txt', 'r') as f:
@@ -17,12 +16,11 @@ def hello_monkey():
     global wd
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
-    if " " not in body and body not in blacklist and body not in used:
-        wd.append(body.title())
+    wd.append(body)
 
     resp = twilio.twiml.Response()
-    if body in used:
-        resp.message("has already been submitted")
+    if wd[len(wd)-1] in used:
+        resp.message("word has already been used")
     else:
         resp.message(body)
     return str(resp)
