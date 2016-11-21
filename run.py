@@ -14,10 +14,12 @@ random.seed()
 @app.route("/words", methods=['GET', 'POST'])
 def hello_monkey():
     global wd
+    global used
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
     if body not in used:
         wd.append(body)
+        used.append(body)
 
     resp = twilio.twiml.Response()
     if body in used:
@@ -31,7 +33,6 @@ def ind():
     global wd
     global i
     global dic
-    global used
     i = i+1
     if i >= len(wd):
         i = 0
@@ -39,7 +40,6 @@ def ind():
         curr = dic[random.randint(0,len(dic))].title()
     else:
         curr = wd.pop()
-    used.append(curr)
     return render_template('index.html',word=curr);
 if __name__ == "__main__":
     app.run(debug=True)
