@@ -16,11 +16,12 @@ def hello_monkey():
     global wd
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
-    wd.append(body)
+    if body not in used:
+        wd.append(body)
 
     resp = twilio.twiml.Response()
     if body in used:
-        resp.message(body,", has already been used")
+        resp.message(body + ", has already been used")
     else:
         resp.message(body)
     return str(resp)
