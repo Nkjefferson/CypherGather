@@ -32,6 +32,20 @@ def hello_monkey():
 
     return str(resp)
 
+@app.route("/new", methods=['GET', 'POST'])
+def getWord():
+    global wd
+    global i
+    global dic
+    i = i+1
+    if i >= len(wd):
+        i = 0
+    if len(wd) == 0:
+        curr = dic[random.randint(0,len(dic))].title()
+    else:
+        curr = wd.pop()
+    return curr
+
 @app.route("/", methods=['GET', 'POST'])
 def ind():
     global wd
