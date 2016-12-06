@@ -8,7 +8,7 @@
  
 </head>
 <body background="{{url_for('static', filename='back.jpg')}}">
-
+    <input type='checkbox' checked id='play'/>
     <h1>Cypher Gather</h1>
     <p id='val'>{{ word }}</p>
 
@@ -16,11 +16,12 @@
 </body>
 <script type="text/javascript">
   setInterval(function(){
-
+  if(document.getElementById('play').checked){	
       function reqListener () {
         console.log( this.responseText );
         document.getElementById('val').innerText = (this.responseText);
       }
+
   
       var oReq = new XMLHttpRequest();
   
@@ -29,6 +30,7 @@
  
       oReq.open("GET", "/new");
       oReq.send();
-  },2000);	
+  }
+  },5000);	
 </script>
 </html>

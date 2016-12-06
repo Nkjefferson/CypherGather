@@ -21,7 +21,7 @@ def hello_monkey():
     if body not in used and ' ' not in body:
         wd.append(body)
         used.append(body)
-        resp.message(body)
+        resp.message(body + " added")
     elif body in used:
         resp.message(body + ", has already been used")
     elif ' ' in body:
