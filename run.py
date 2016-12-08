@@ -17,8 +17,6 @@ def hello_monkey():
     global used
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
-    if body[len(body)] == ' ':
-        body = body[:-1]
     resp = twilio.twiml.Response()
     if body not in used and ' ' not in body:
         wd.append(body)
