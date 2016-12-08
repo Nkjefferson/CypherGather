@@ -17,6 +17,8 @@ def hello_monkey():
     global used
     """Respond to incoming calls with a simple text message."""
     body = request.values.get('Body', None)
+    if body[len(body)] == ' ':
+        body = body[:-1]
     resp = twilio.twiml.Response()
     if body not in used and ' ' not in body:
         wd.append(body)
@@ -44,6 +46,7 @@ def getWord():
         curr = dic[random.randint(0,len(dic))].title()
     else:
         curr = wd.pop()
+    used.append(curr)
     return curr
 
 @app.route("/", methods=['GET', 'POST'])
@@ -58,6 +61,7 @@ def ind():
         curr = dic[random.randint(0,len(dic))].title()
     else:
         curr = wd.pop()
+    used.append(curr)
     return render_template('index.html',word=curr);
 if __name__ == "__main__":
     app.run(debug=True)
