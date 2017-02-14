@@ -26,7 +26,7 @@ def hello_monkey():
         resp.message(body + " added")
     elif body in used:
         resp.message(body + ", has already been used")
-    elif (' ' in body) or ('-' in body) or ('_' in body) or (',' in body):
+    elif (',' in body) or ('-' in body) or ('_' in body) or (',' in body):
         resp.message("Please only send in a single word")
     else:
         resp.message("invalid")
