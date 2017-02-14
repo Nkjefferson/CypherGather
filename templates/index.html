@@ -9,12 +9,15 @@
 </head>
 <body background="{{url_for('static', filename='back.jpg')}}">
     <input type='checkbox' checked id='play'/>
+    <input type='checkbox'  id='speed'/>
     <h1>Cypher Gather</h1>
     <p id='val'>{{ word }}</p>
 
     {# a comment #}
 </body>
 <script type="text/javascript">
+var speed = 6500;
+
   setInterval(function(){
   if(document.getElementById('play').checked){	
       function reqListener () {
@@ -24,13 +27,17 @@
 
   
       var oReq = new XMLHttpRequest();
-  
+       if(document.getElementById('speed').checked){
+        speed = 4000;
+      }else{
+        speed = 6500;
+      } 
       // defining behavior for when the response comes back to us
       oReq.addEventListener("load", reqListener);
  
       oReq.open("GET", "/new");
       oReq.send();
   }
-  },6500);	
+  },speed);	
 </script>
 </html>
