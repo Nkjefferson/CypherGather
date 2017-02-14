@@ -20,7 +20,7 @@ def hello_monkey():
     resp = twilio.twiml.Response()
     if body.endswith(' '):
         body = body[:-1]
-    if body not in used and ' ' not in body or '-' in body or '_' in body or ',' in body:
+    if body not in used and ' ' not in body or '-' not in body or '_' not in body or ',' not in body:
         wd.append(body)
         used.append(body)
         resp.message(body + " added")
