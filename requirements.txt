@@ -16,7 +16,7 @@ pycurl==7.19.3
 pyOpenSSL==0.13
 pyserial==2.6
 pytz==2016.7
-PyYAML==3.10
+PyYAML==5.1
 requests==2.2.1
 six==1.5.2
 ssh-import-id==3.21
